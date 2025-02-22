@@ -6,13 +6,121 @@ import java.util.Scanner;
 
 
 
+
+
+class OwnArray {
+    
+    public void traversing(int[] array) {
+        
+        System.out.println("Array Traversing");
+        
+        for(int i = 0; i < array.length; ++i) {
+            System.out.println("Array content: " + array[i]);
+        }
+    }
+    
+    public void linearSearching(int[] array) {
+        
+        System.out.println("Linear Searching");
+        
+        int targetNumber = 10;
+        
+        for(int i = 0; i < array.length; ++i) {
+            if(i == targetNumber) {
+                System.out.println("Found the target: " + array[i]);
+                return;              
+            } else {
+                System.out.println("Target doesnt exist");
+            }
+        }
+    }
+    
+    public void binarySearching(int[] array) {
+        
+        System.out.println("Binary Searching");
+        
+        int targetNumber = 10;
+        int left = 0;
+        int right = array.length;
+        
+        while(left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if(array[mid] == targetNumber) {
+                System.out.println("Number found at index " + mid);
+                return;
+            } else if(array[mid] < targetNumber) {
+                left = mid + 1;              
+            } else {
+                right = mid - 1;
+            }
+        }     
+    }
+    
+    public void insertBeginning(int[] array) {
+        
+        System.out.println("Insert array in the beginning");
+        
+        int toInsert = 10;
+        int[] newArray = new int[array.length + 1];
+        
+        for(int i = array.length - 1; i >= 0; --i) {
+            newArray[i + 1] = array[i];
+        }
+        
+        newArray[0] = toInsert;
+        
+        for(int copy : newArray) {
+            System.out.println("New Array: " + copy);
+        }
+    }
+    
+    public void insertEnd(int[] array) {
+        
+        System.out.println("Insert array in the end");
+        
+        int toInsert = 50;
+        int[] newArray = new int[array.length + 1];
+        
+        for(int i = 0; i < array.length; ++i) {
+            newArray[i] = array[i];
+        }
+        
+        newArray[newArray.length - 1] = toInsert;
+        
+        for(int copy : newArray) {
+            System.out.println("New Array: " + copy);
+        }
+    }
+    
+    public void insertAnywhere(int[] array) {
+        
+    }
+    
+    public void deleteBeginning() {
+        
+    }   
+    
+    public void deleteEnd() {
+        
+    }
+    
+    public void deleteAnywhere() {
+        
+    }
+    
+}
+
+
+
+
+
 public class JavaArray {
 
     public static void main(String[] args) {
               
         Scanner scanner = new Scanner(System.in);      
-
-        
+            
         /*
         
         //example of array traversing - O(1) 
@@ -117,7 +225,7 @@ public class JavaArray {
         for(int copy : forNewArray) {
             System.out.println("New array: " + copy);
         }
-        */
+        
         
         
         //insertion operation (insert at the specific index) --> Time complexity O(n)
@@ -138,11 +246,40 @@ public class JavaArray {
         
         //shift the remmaining index
         for(int i = index; i < anotherArray.length; i++) {
-            anotherNewArray[i + 1] = anotherNewArray[i];
+            anotherNewArray[i + 1] = anotherArray[i];
         }
         
         for(int copy : anotherNewArray) {
             System.out.println("New Array: " + copy);
+        }
+
+        
+        
+        //removing the element on the last index 
+        int[] currentArray = {1, 2, 3, 4};
+        int[] newArray = new int[currentArray.length - 1];
+        
+        for(int i = 0; i < currentArray.length - 1; ++i) {
+            newArray[i] = currentArray[i];
+        }
+        
+        for(int copy : newArray) {
+            System.out.println(copy);
+        }
+
+        */
+        
+        
+        //removing the element on the first index 
+        int[] oldArray = {1,2,3};
+        int[] newArray = new int[oldArray.length - 1];
+        
+        for(int i = 1; i < oldArray.length; ++i) { //shift all array starting from index 1 backwards
+            newArray[i - 1] = oldArray[i];
+        }
+        
+        for(int copy : newArray) {
+            System.out.println(copy);
         }
     }
 }
