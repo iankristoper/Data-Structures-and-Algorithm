@@ -63,15 +63,48 @@ class Problems {
                 max = array[i];
             }
             
-            if(array[i] > secondMax) {
+            if(array[i] >= secondMax) {
                 if(array[i] != max) {
                    secondMax = array[i]; 
+                } else if (array[i] == max) {
+                   secondMax = -1; //indicate as null
                 }
             }
         }
         
         System.out.println("Maximum number in array: " + max);
         System.out.println("Second max number in array: " + secondMax);
+    }
+    
+    public void checkAscendingOrder(int[] array) {
+        
+        System.out.println("Ascending Order");
+        
+        boolean isAscending = false;
+        
+        for(int i = 0; i < array.length; ++i) {
+            
+            while(!isAscending) {
+                if(array[i] > array[i + 1]) {
+                    isAscending = true;
+                    System.out.println("Not in proper order");
+                }
+            }
+            
+            if(array[i] > array[i + 1]) {
+                for(int j = i + 1; j >= 0; --j) {
+                    if(array[j] < array[i]) {
+                        array[i] = array[j];
+                    } 
+                }
+            }
+        }
+        
+        for(int copy : array) {
+            System.out.println("New ascending array: " + copy);
+        }
+        
+        
     }
 }
 
@@ -89,7 +122,8 @@ public class ArrayProblems {
         Problems problem = new Problems();
         
         int[] array = {5, 5, 5, 5, 5};
-        problem.secondLargest(array);
+        problem.checkAscendingOrder(array);
+        
         
     }
     
