@@ -15,21 +15,16 @@ class Problems {
         System.out.println("Find the maximum and minimum number in array[n]");
         
         int max = array[0];
-        int min = array[0];
+        int min = array[1];
         
         for(int i = 1; i < array.length; ++i) {
-            if(array[i] > max) {
+            if(max < array[i]) {
                 max = array[i];
             }
-            
-            if(array[i] < min) {
-                min = array[i];
-            }
-        }   
+        }
         
-        System.out.println("Maximum number of given Array: " + max);
-        System.out.println("Minimum number of given Array: " + min);      
-        
+        System.out.println("Max number: " + max);
+
     }
     
     public void reverseArray(int[] array) {
@@ -82,29 +77,34 @@ class Problems {
         
         boolean isAscending = false;
         
-        for(int i = 0; i < array.length; ++i) {
-            
-            while(!isAscending) {
-                if(array[i] > array[i + 1]) {
-                    isAscending = true;
-                    System.out.println("Not in proper order");
-                }
-            }
-            
+        for(int i = 0; i < array.length - 1; ++i) {
             if(array[i] > array[i + 1]) {
-                for(int j = i + 1; j >= 0; --j) {
-                    if(array[j] < array[i]) {
-                        array[i] = array[j];
-                    } 
+                System.out.println("Not in ascending order");
+                System.out.println(array[i]);
+                break;
+            } 
+        }        
+    }
+    
+    public void moveZero(int[] array) {
+        
+        System.out.println("Moving zero to the end of the array");
+        
+        int temp = 0;
+        
+        for(int i = 0; i < array.length; ++i) {
+            if(array[i] == 0) {
+                for(int j = i; j < array.length - 1; ++j) {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
                 }
             }
         }
         
         for(int copy : array) {
-            System.out.println("New ascending array: " + copy);
+            System.out.println("New Array: " + copy);
         }
-        
-        
     }
 }
 
@@ -121,8 +121,8 @@ public class ArrayProblems {
         Scanner scanner = new Scanner(System.in);
         Problems problem = new Problems();
         
-        int[] array = {5, 5, 5, 5, 5};
-        problem.checkAscendingOrder(array);
+        int[] array = {3, 2, 5, 7, 1};
+        problem.findMaxMinNumber(array);
         
         
     }
