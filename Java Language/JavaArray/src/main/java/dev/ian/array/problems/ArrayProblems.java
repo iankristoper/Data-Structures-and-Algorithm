@@ -15,16 +15,29 @@ class Problems {
         System.out.println("Find the maximum and minimum number in array[n]");
         
         int max = array[0];
-        int min = array[1];
+        int min = array[0];
+        boolean isAllEqual = true;
         
         for(int i = 1; i < array.length; ++i) {
             if(max < array[i]) {
                 max = array[i];
+            } 
+            
+            if(min > array[i]) {
+                min = array[i];
+            }    
+            
+            if(array[i] != array[0]) {
+                isAllEqual = false;
             }
         }
         
-        System.out.println("Max number: " + max);
-
+        if(isAllEqual) {
+            System.out.println("All numbers in array are equal");
+        } else {
+            System.out.println("Max number: " + max);
+            System.out.println("Min number: " + min);
+        }
     }
     
     public void reverseArray(int[] array) {
@@ -90,20 +103,65 @@ class Problems {
         
         System.out.println("Moving zero to the end of the array");
         
-        int temp = 0;
+        int j = 0; //pointer comparator 
         
         for(int i = 0; i < array.length; ++i) {
-            if(array[i] == 0) {
-                for(int j = i; j < array.length - 1; ++j) {
-                    temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
-                }
+            if(array[i] != 0) {
+                array[j] = array[i];
+                j++;
             }
+        }   
+        
+        while(j < array.length) {
+            array[j] = 0;
+            j++;
         }
         
         for(int copy : array) {
-            System.out.println("New Array: " + copy);
+            System.out.println("New array: " + copy);
+        }
+    }
+    
+    public void findMissing(int[] array) {
+        
+        System.out.println("Finding the missing number {1,3,4,5,9,12,15,20}");
+        
+        int j = 1;
+        int diff = 0;
+        int iter = 0;
+        
+        for(int i = 0; i < array.length - 1; ++i) {
+            diff = array[j] - array[i];
+            iter = array[i];
+            
+            while(diff > 1) {
+                System.out.println("Missing: " + ++iter);
+                --diff;
+            }
+            
+            j++; //iterate j for maintaining the balance 
+        }
+        
+    }
+    
+    public void findDuplicate(int[] array) {
+        
+        System.out.println("FInding the duplicates");
+        
+        for(int i = 0; i < array.length - 1; ++i) {
+            for(int j = 0; j < array.length - 1; ++j) {
+                if(array[i] == array[j + 1]) {
+                    System.out.println("Duplicate number: " + array[i]);
+                }
+                
+                if(i != 0) {
+                    for(int k = i; k > 0; --k) {
+                        if(array[k] == array[k - 1]) {
+                            System.out.println("Duplicate number: " + array[k]);
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -121,10 +179,8 @@ public class ArrayProblems {
         Scanner scanner = new Scanner(System.in);
         Problems problem = new Problems();
         
-        int[] array = {3, 2, 5, 7, 1};
-        problem.findMaxMinNumber(array);
-        
-        
+        int[] array = {1,3,4,5,9,12,15,20};
+        problem.findDuplicate(array);        
     }
     
 }
